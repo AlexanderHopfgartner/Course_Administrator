@@ -1,6 +1,5 @@
 def main():
-    print("test_1")
-    print("test_2")
+    # TODO 1. call couse_administrator
 
 
 if __name__ == "__main__":

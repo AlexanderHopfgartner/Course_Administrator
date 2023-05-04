@@ -1,0 +1,1 @@
+# TODO 3. create all validation checks
