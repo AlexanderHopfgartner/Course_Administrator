@@ -1,9 +1,8 @@
-# TODO 2.1 create 2 classes
-# TODO 2.1.2 create Adress
+from consts import INPUT_START
 
 class Address:
 
-    def __init__(self, *args,):
+    def __init__(self, *args, ):
         args = args[0]
         self.address_name = args[0]
         self.number = args[1]
@@ -25,7 +24,7 @@ class CourseAdministrator(Address):
         self.name = kwargs["name"]
         self.full_name = self.first_name + " " + self.name
         self.role = kwargs["role"]
-        address = [item for item in kwargs["addresse"].values()]
+        address = [item for item in kwargs["address"].values()]
         super().__init__(address)
         self.output = self.structure()
 
@@ -45,7 +44,6 @@ class CourseAdministrator(Address):
                 line += "\t\t\t\tUrl.: " + self.url
         return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|" + line
 
-
     def __str__(self):
         return self.output
 
@@ -55,13 +53,25 @@ class CourseAdministrator(Address):
     def __call__(self, *args, **kwargs):
         return self.output
 
+
 # TODO 2. construct main loop
 
 
 def course_administrator():
-    print(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer", addresse={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782, "city": "Nikolsdorf"} ))
+    print(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
+                              address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
+                                       "city": "Nikolsdorf"}))
+    add_member()
+    exit_key = input(f"exit_key?: (\"q!\"){INPUT_START}")
+    if exit_key == "q!":
+        return exit_key
+
 
 
 def add_member():
+    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_START}",).lower()[0] == "y":
+        print("milch")
+    else:
+        return
 
-#TODO 2.2 manage main loop
+# TODO 2.2 manage main loop
