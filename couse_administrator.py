@@ -15,7 +15,7 @@ class Address:
 class CourseAdministrator(Address):
     id = 0
 
-    def __init__(self, telnum: str = "", email: str = "", url: str = "", **kwargs):
+    def __init__(self, telnum: str = None, email: str = None, url: str = None, **kwargs):
         self.telnum = telnum
         self.email = email
         self.url = url
@@ -26,23 +26,42 @@ class CourseAdministrator(Address):
         self.full_name = self.first_name + " " + self.name
         self.role = kwargs["role"]
         address = [item for item in kwargs["addresse"].values()]
-
         super().__init__(address)
+        self.output = self.structure()
+
+    def structure(self):
+        line = ""
+        if self.telnum:
+            line += "\t\t\t\tTel.: " + self.telnum
+        if self.email:
+            if line:
+                line += "  E-Mail.: " + self.email
+            else:
+                line += "\t\t\t\tE-Mail.: " + self.email
+        if self.url:
+            if line:
+                line += "  Url.: " + self.url
+            else:
+                line += "\t\t\t\tUrl.: " + self.url
+        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|" + line
+
 
     def __str__(self):
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|"
+        return self.output
 
     def __repr__(self):
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|"
+        return self.output
 
     def __call__(self, *args, **kwargs):
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|"
+        return self.output
 
 # TODO 2. construct main loop
 
 
 def course_administrator():
-    print(CourseAdministrator(f_name="Alexander", name="Hopfgartner", role="Teilnehmer", addresse={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782, "city": "Nikolsdorf"} ))
+    print(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer", addresse={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782, "city": "Nikolsdorf"} ))
 
+
+def add_member():
 
 #TODO 2.2 manage main loop
