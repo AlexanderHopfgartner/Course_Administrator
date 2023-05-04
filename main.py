@@ -1,4 +1,5 @@
 def main():
+    print(" ")
     # TODO 1. call couse_administrator
 
 
