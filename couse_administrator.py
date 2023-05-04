@@ -1,5 +1,6 @@
 from consts import INPUT_START
 
+
 class Address:
 
     def __init__(self, *args, ):
@@ -15,9 +16,6 @@ class CourseAdministrator(Address):
     id = 0
 
     def __init__(self, telnum: str = None, email: str = None, url: str = None, **kwargs):
-        self.telnum = telnum
-        self.email = email
-        self.url = url
         CourseAdministrator.id += 1
         self.id = CourseAdministrator.id
         self.first_name = kwargs["f_name"]
@@ -26,6 +24,9 @@ class CourseAdministrator(Address):
         self.role = kwargs["role"]
         address = [item for item in kwargs["address"].values()]
         super().__init__(address)
+        self.telnum = telnum
+        self.email = email
+        self.url = url
         self.output = self.structure()
 
     def structure(self):
@@ -56,22 +57,31 @@ class CourseAdministrator(Address):
 
 # TODO 2. construct main loop
 
+user_list = []
+
 
 def course_administrator():
-    print(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
-                              address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
-                                       "city": "Nikolsdorf"}))
-    add_member()
+    """Course_administrator main_loop
+
+    Return q!"""
+    user_list.append(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
+                                         address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
+                                                  "city": "Nikolsdorf"}))
+    user_list.append(CourseAdministrator(telnum="123123123", email="email@email.com", url="Website.com",
+                                         f_name="Milch", name="Milchiger", role="Teilnehmerin",
+                                         address={"address_name": "Nikl", "number": 92, "postcode": 1110,
+                                                  "city": "Wien"}))
+    [print(user) for user in user_list]
     exit_key = input(f"exit_key?: (\"q!\"){INPUT_START}")
     if exit_key == "q!":
         return exit_key
-
+    else:
+        add_member()
 
 
 def add_member():
-    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_START}",).lower()[0] == "y":
+    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_START}", ).lower()[0] == "y":
         print("milch")
     else:
         return
 
-# TODO 2.2 manage main loop
