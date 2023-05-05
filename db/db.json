@@ -1,0 +1,35 @@
+{
+  "ids": {
+    "last_id": 2,
+    "members": [
+      {
+        "telnum": "06803132323",
+        "email": "al.ho.260@gmail.com",
+        "url": "Website.com",
+        "f_name": "Alexander",
+        "name": "Hopfgartner",
+        "role": "Teilnehmer",
+        "address": {
+          "address_name": "Nikolsdorf",
+          "number": 94,
+          "postcode": 9782,
+          "city": "Nikolsdorf"
+        }
+      },
+      {
+      "telnum": "12341234",
+        "email": "google@gmail.com",
+        "url": "Websiten.com",
+        "f_name": "Alexandere",
+        "name": "Hopf",
+        "role": "Teilnehmer",
+        "address": {
+          "address_name": "Nikolasdorf",
+          "number": 127,
+          "postcode": 1111,
+          "city": "Wien"
+        }
+      }
+    ]
+  }
+}

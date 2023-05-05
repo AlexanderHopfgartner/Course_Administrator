@@ -2,7 +2,7 @@ from consts import INPUT_END
 from logic.validator import *
 
 
-class Address:
+class Address(object):
 
     def __init__(self, *args, ):
         args = args[0]
@@ -13,7 +13,7 @@ class Address:
 
 
 # TODO 2.1.1 create CourseAdministrator
-class Member(Address):
+class Member(Address, object):
     id = 0
 
     def __init__(self, telnum: str = None, email: str = None, url: str = None, **kwargs):
@@ -29,6 +29,7 @@ class Member(Address):
         self.email = email
         self.url = url
         self.output = self.structure()
+
 
     def structure(self):
         line = ""
@@ -61,7 +62,7 @@ class Member(Address):
 user_list = []
 
 
-def course_administrator():
+def course_administration(db):
     """Course_administrator main_loop
 
     Return q!"""
