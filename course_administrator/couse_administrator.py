@@ -1,4 +1,5 @@
-from consts import INPUT_START
+from consts import INPUT_END
+from logic.validator import *
 
 
 class Address:
@@ -6,18 +7,18 @@ class Address:
     def __init__(self, *args, ):
         args = args[0]
         self.address_name = args[0]
-        self.number = args[1]
+        self.street_number = args[1]
         self.postcode = args[2]
         self.city = args[3]
 
 
 # TODO 2.1.1 create CourseAdministrator
-class CourseAdministrator(Address):
+class Member(Address):
     id = 0
 
     def __init__(self, telnum: str = None, email: str = None, url: str = None, **kwargs):
-        CourseAdministrator.id += 1
-        self.id = CourseAdministrator.id
+        Member.id += 1
+        self.id = Member.id
         self.first_name = kwargs["f_name"]
         self.name = kwargs["name"]
         self.full_name = self.first_name + " " + self.name
@@ -43,7 +44,7 @@ class CourseAdministrator(Address):
                 line += "  Url.: " + self.url
             else:
                 line += "\t\t\t\tUrl.: " + self.url
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.number}, {self.postcode} {self.city}|" + line
+        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.street_number}, {self.postcode} {self.city}|" + line
 
     def __str__(self):
         return self.output
@@ -64,15 +65,15 @@ def course_administrator():
     """Course_administrator main_loop
 
     Return q!"""
-    user_list.append(CourseAdministrator(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
-                                         address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
+    user_list.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
+                            address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
                                                   "city": "Nikolsdorf"}))
-    user_list.append(CourseAdministrator(telnum="123123123", email="email@email.com", url="Website.com",
-                                         f_name="Milch", name="Milchiger", role="Teilnehmerin",
-                                         address={"address_name": "Nikl", "number": 92, "postcode": 1110,
+    user_list.append(Member(telnum="123123123", email="email@email.com", url="Website.com",
+                            f_name="Milch", name="Milchiger", role="Teilnehmerin",
+                            address={"address_name": "Nikl", "number": 92, "postcode": 1110,
                                                   "city": "Wien"}))
     [print(user) for user in user_list]
-    exit_key = input(f"exit_key?: (\"q!\"){INPUT_START}")
+    exit_key = input(f"exit_key?: (\"q!\"){INPUT_END}")
     if exit_key == "q!":
         return exit_key
     else:
@@ -80,7 +81,7 @@ def course_administrator():
 
 
 def add_member():
-    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_START}", ).lower()[0] == "y":
+    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_END}", ).lower()[0] == "y":
         print("milch")
     else:
         return

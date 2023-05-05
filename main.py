@@ -1,10 +1,10 @@
-from couse_administrator import course_administrator
+from logic.menu import menu
 
 
 def main():
     run = True
     while run:
-        key = course_administrator()
+        key = menu()
         if key == "q!":
             run = False
 
