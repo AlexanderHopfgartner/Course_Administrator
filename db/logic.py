@@ -3,18 +3,13 @@ from course_administrator.couse_administrator import Member
 
 class DB:
 
-    def db_add(self):
-        # TODO 3.3 add Member to members
-        pass
-
     def db_log_on(self):
         with open("db/db.json", "r") as db_json:
             db_read = json.load(db_json)
             [print(member) for member in db_read["ids"]["members"]]
             self.members += [Member(**data) for data in db_read["ids"]["members"]]
-        # TODO 3.1 by log to the local db set Member.id = last id
-        # TODO 3.1.1 return db read IF db
-        pass
+        # TODO 3.1 by log to the local db set Member.id = db_read.ids.last_id
+        # and update the Member.id = db_read.ids.last_id
 
 
     def db_save(self):
