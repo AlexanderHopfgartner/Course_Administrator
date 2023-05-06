@@ -179,7 +179,7 @@ def member_form() -> dict:
 user_list = []
 
 
-def course_administration(db):
+def course_administration(db, user):
     """Course_administrator main_loop
 
     Return q!"""
@@ -190,16 +190,34 @@ def course_administration(db):
                              f_name="Milch", name="Milchiger", role="Teilnehmerin",
                              address={"address_name": "Nikl", "number": 92, "postcode": 1110,
                                       "city": "Wien"}))
-    exit_key = input(f"exit_key?: (\"q!\"){INPUT_END}")
-    if exit_key == "q!":
-        return exit_key
-    elif exit_key.lower()[0] == "h":
+    print(f"welcome in the DataBase administration, {user.full_name}")
+    key = input(f"{INPUT_END}")
+    if key == "q!":
+        if input(f"Reminder:\nDid you save? [yes/no]{INPUT_END}").lower()[0] == "y":
+            return key
+    if key.lower()[0] == "h":
         # TODO 2.2 add help report
         pass
-    elif exit_key.lower()[0] == "a":
+    if key.lower()[0] == "v":
+        pass
+    if user.id == 0 and key.lower()[0] == "a":
+        """Add a member"""
         new_member_form = add_member()
         if new_member_form:
             db.members.append(Member(**new_member_form))
+    if user.id == 0 and key.lower()[0] == "e":
+        print("edit")
+        """Edit a member"""
+        pass
+    if user.id == 0 and key.lower()[0] == "d":
+        print("delete")
+        """Delete a member"""
+        pass
+    if user.id == 0 and key.lower()[0] == "s":
+        print("save")
+        """save the DataBase"""
+        pass
+
 
         [print(mem) for mem in db.members]
 
