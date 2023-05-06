@@ -28,8 +28,14 @@ class Member(Address, object):
         self.role = kwargs["role"]
         address = [item for item in kwargs["address"].values()]
         super().__init__(address)
+        if telnum:
+            self.telnum = None
         self.telnum = telnum
+        if email:
+            self.email = None
         self.email = email
+        if url:
+           self.url = None
         self.url = url
         self.output = self.structure()
 
@@ -102,7 +108,8 @@ def member_form() -> dict:
         while form["role"] is None:
             ###########################################  hilfe  ######################################################
             role = input(f"Please Enter Role.\n"
-                         f"['Ter' = Teilnehmer:in/ {'TXX'} = {'das weiß ich nicht mehr'}/ {'XXX'} = {'keine ahnung'}]{INPUT_END}")
+                         f"['Ter' = Teilnehmer:in/ {'TXX'} = {'das weiß ich nicht mehr'}/ {'XXX'} ="
+                         f" {'keine ahnung'}]{INPUT_END}")
             print(role[0:4])
             if role[0:4] == "Ter":
                 if input(f"Is Teilnehmer:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
