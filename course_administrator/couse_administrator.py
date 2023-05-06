@@ -16,7 +16,7 @@ class Address(object):
 class Member(Address, object):
     id = 0
 
-    def __init__(self, telnum: str = None, email: str = None, url: str = None, *args, **kwargs):
+    def __init__(self, telnum: str = None, email: str = None, url: str = None, **kwargs):
         try:
             Member.id = kwargs["id"]
         except KeyError:
@@ -36,18 +36,19 @@ class Member(Address, object):
     def structure(self):
         line = ""
         if self.telnum:
-            line += "\t\t\t\tTel.: " + self.telnum
+            line += "\t\t\t\tTel.: " + str(self.telnum)
         if self.email:
             if line:
-                line += "  E-Mail.: " + self.email
+                line += "  E-Mail.: " + str(self.email)
             else:
-                line += "\t\t\t\tE-Mail.: " + self.email
+                line += "\t\t\t\tE-Mail.: " + str(self.email)
         if self.url:
             if line:
-                line += "  Url.: " + self.url
+                line += "  Url.: " + str(self.url)
             else:
-                line += "\t\t\t\tUrl.: " + self.url
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.street_number}, {self.postcode} {self.city}|" + f"{line:>80}"
+                line += "\t\t\t\tUrl.: " + str(self.url)
+        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.street_number}," \
+               f"{self.postcode} {self.city}|" + f"{line:>80} "
 
     def __str__(self):
         return self.output
@@ -60,6 +61,18 @@ class Member(Address, object):
 
 
 def member_form() -> dict:
+    """Return a form for Member:
+    f_name: requite
+    name: requite
+    role: requite
+    addres: requite
+        address_name: requite
+        address_number: requite
+        postcode: requite
+        city: requite
+    telnum: optional
+    email: optional
+    url: optional"""
     form = {
         "telnum": None,
         "email": None,
@@ -80,7 +93,6 @@ def member_form() -> dict:
             f_name = input(f"Please Enter first name.{INPUT_END}")
             if validate_name(f_name):
                 form["f_name"] = f_name
-            print("f_name:", f_name)
 
         while form["name"] is None:
             name = input(f"Please Enter name.{INPUT_END}")
@@ -88,26 +100,48 @@ def member_form() -> dict:
                 form["name"] = name
 
         while form["role"] is None:
-            ###########################################  hilfe  ###############################################################
+            ###########################################  hilfe  ######################################################
             role = input(f"Please Enter Role.\n"
-                         f"[t = Teilnehmer:in/ T = das weiß ich nicht mehr/ das andere = keine ahnung]{INPUT_END}")
-            if role[0] == "t":
+                         f"['Ter' = Teilnehmer:in/ {'TXX'} = {'das weiß ich nicht mehr'}/ {'XXX'} = {'keine ahnung'}]{INPUT_END}")
+            print(role[0:4])
+            if role[0:4] == "Ter":
                 if input(f"Is Teilnehmer:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
                     form["role"] = "Teilnehmer:in"
-                    #################################  geschwungenen klammer tauschen
-            if role[0] == "T":
+                    continue
+                    #################################  geschwungenen klammer tauschen  ##############################
+            if role[0:4] == f"{'XXX'}":
                 if input(f"Is {'Teilnehmer:in'} right? [yes/no]{INPUT_END}").lower()[0] == "y":
                     form["role"] = f"{'Teilnehmer:in'}"
-                    ##################################
-            if role[0] == f"{'t'}":
+                    continue
+                    ##################################  hier auch  ##################################################
+            if role[0:4] == f"{'XXX'}":
                 if input(f"Is {'Teilnehmer:in'} right? [yes/no]{INPUT_END}").lower()[0] == "y":
                     form["role"] = f"{'Teilnehmer:in'}"
+                    continue
+            print("Sorry not a role in the list.")
 
-        while form["address"]["address_name"] is None and form["address"]["number"] is None and form["address"]["postcode"] is None and form["address"]["city"] is None:
+        while form["address"]["address_name"] is None and form["address"]["number"] is None and\
+                form["address"]["postcode"] is None and form["address"]["city"] is None:
+
             while form["address"]["address_name"] is None:
-                address_name = input(f"Please enter your street name")
+                address_name = input(f"Please Enter name of the street{INPUT_END}")
+                if validate_address_name(address_name):
+                    form["address"]["address_name"] = address_name
 
+            while form["address"]["number"] is None:
+                street_number = input(f"Please Enter street number{INPUT_END}")
+                if validate_street_number(street_number):
+                    form["address"]["number"] = street_number
 
+            while form["address"]["postcode"] is None:
+                postcode = input(f"Please Enter postcode{INPUT_END}")
+                if validate_postcode(postcode):
+                    form["address"]["postcode"] = int(postcode)
+
+            while form["address"]["city"] is None:
+                city = input(f"Please Enter city name{INPUT_END}")
+                if validate_city(city):
+                    form["address"]["city"] = city
 
         if form["telnum"] is None:
             number = input(f"Please Enter your Phonenumber (OPTIONAL) ['number'/'no']{INPUT_END}")
@@ -156,9 +190,11 @@ def course_administration(db):
         # TODO 2.2 add help report
         pass
     elif exit_key.lower()[0] == "a":
-        new_member = add_member()
-        if new_member:
-            db.members.append(new_member)
+        new_member_form = add_member()
+        if new_member_form:
+            db.members.append(Member(**new_member_form))
+
+        [print(mem) for mem in db.members]
 
 
 def add_member():

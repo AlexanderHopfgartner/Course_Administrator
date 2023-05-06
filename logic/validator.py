@@ -6,7 +6,8 @@ Sie müssen in den meisten fällen NUR True zurück geben.
 Oder Ture or False
 wenn er invalide ist bitte auch eine nachricht dazu
 
-aktuell kannst du sie sogar testen, indem du main.py runst dann beim "exit_key?" a/add eingibst.
+aktuell kannst du sie sogar testen, indem du zuerst die '#' entfernst im validator.py und dann die main.py runst dann
+beim "exit_key?" a/add eingibst.
 Dann kannst du nutzer hinzufügen welche auch schon die validatoren benutzen.
 
 telnum/email/url sollte optional bleiben, dahei sollten die True or False returnen
@@ -44,34 +45,42 @@ def validate_street_number(street_number: str) -> bool:
         # print(new_list)
         # print("Please enter your streetnumber in this format:\n123-124/12/1")
     print(numbers)
+    # return True
+    pass
 
 
-def validate_postcode(postcode: int) -> bool:
+def validate_postcode(postcode: str) -> bool:
     """Return tuple with boolean and error message as a string"""
     print("not finished")
+    # return True
 
 
 def validate_city(city: str) -> bool:
     """Return True if it is a valid city"""
     print("not finished")
+    # return True
     pass
 
 
-def validate_telnum(TelNr: str) -> bool | str:
+def validate_telnum(telnum: str) -> bool | str:
     """Return False if the phonenumber is invalid\n\nReturn True"""
     print("not finsihed")
+    # return telnum
     pass
 
 
 def validate_email(email: str) -> bool | str:
     """Return False if the email is invalid\n\nReturn True"""
     print("not finished")
+    # return email
     pass
+
 
 
 def validate_url(url: str) -> bool | str:
     """Return False if the url is invalid\n\nReturn True"""
     print("not finished")
+    # return url
     pass
 
 
