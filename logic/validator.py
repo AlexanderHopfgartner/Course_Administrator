@@ -7,11 +7,29 @@ Oder Ture or False
 wenn er invalide ist bitte auch eine nachricht dazu
 
 aktuell kannst du sie sogar testen, indem du zuerst die '#' entfernst im validator.py und dann die main.py runst dann
-beim "exit_key?" a/add eingibst.
-Dann kannst du nutzer hinzufügen welche auch schon die validatoren benutzen.
+musst du dich erst anmelden (du kannst dich dann auch hinzufügen mit der id 0)
+melde dich mit meinem namen an "Alexander Hopfgartner" dann hast du "admin_rechte"
+oder mit "Alexander Hopf" dann bist du ein normaler user
+dann kannst du (a/add) nutzen um nutzer hinzu zu fügen die die validations nutzen
 
 telnum/email/url sollte optional bleiben, dahei sollten die True or False returnen
 damit man bei einem invalid input nicht mehr gefragt wird.
+
+Admin check ist im course_administrator
+was dann noch fehlt ist beim course_administrator die restlichen input möglichkeiten
+(e/edit) user editieren (wenn man admin ist)
+(h/help) kann jeder was dir dann deine möglichkeinen anzeigt als aktueller user
+(d/delete) user löschen (wenn man admin ist
+(s/save) um die aktuelle DataBase zu speichern (wenn man admin ist)
+
+was ich dir noch lasse zum üben/lernen ist die BD
+dort kannst du selbst dann versuchen die logik hinzubekommen für
+db_save (also die aktuelle db mit der alten überschrieben
+db_log_on die Member.id ändern auf die db_read.ids.last_id
+
+
+ich hab den code für db_log_on geschrieben um die DB nutzen zu können und um sich anzu melden
+und damit du etwa beispiel code dafür hast
 ########################################################################################################################"""
 def validate_name(name: str) -> bool:
     """Return True if the name is valid
