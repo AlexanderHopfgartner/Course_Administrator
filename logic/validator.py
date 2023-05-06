@@ -1,29 +1,38 @@
 # TODO 3. create all validation checks
-def validate_name(name: str) -> tuple[bool, str]:
-    """if name
-       Return tuple[boolean=True and name=string]
 
-       if name invalid print an error message and
+"""########################################################################################################################
+ich hab etwas die validater abgändert kannst du sie zum funktionieren bringe.
+Sie müssen in den meisten fällen NUR True zurück geben.
+Oder Ture or False
+wenn er invalide ist bitte auch eine nachricht dazu
 
-       Return tuple[boolean=False, name=string]
+aktuell kannst du sie sogar testen, indem du main.py runst dann beim "exit_key?" a/add eingibst.
+Dann kannst du nutzer hinzufügen welche auch schon die validatoren benutzen.
+
+telnum/email/url sollte optional bleiben, dahei sollten die True or False returnen
+damit man bei einem invalid input nicht mehr gefragt wird.
+########################################################################################################################"""
+def validate_name(name: str) -> bool:
+    """Return True if the name is valid
+
+       if name invalid print an error message.
     """
     for name in name.split():
         if name.isalpha():
             print("The name is valid")
-            return True, name
+            return True
     print("The name entered is not correct\nOnly letters and spaces are allowed\n")
-    return False, name
 
 
-def validate_address_name(address_name: str) -> tuple[bool, str]:
-    """Return tuple with boolean and error message as a string"""
+def validate_address_name(address_name: str) -> bool:
+    """Return False if the address_name is invalid\n\nReturn True"""
     if type(address_name) == str:
         return True, "The address name is valid"
     return False, "The address name is not valid\nOnly letters and spaces are allowed"
 
 
-def validate_street_number(street_number: str) -> tuple[bool, str]:
-    """Return tuple with boolean and error message as a string"""
+def validate_street_number(street_number: str) -> bool:
+    """Return False if the street_number is invalid\n\nReturn True"""
     new_list = []
     numbers = street_number.split('/')
     print(numbers[0][0], type(int(numbers[0][0])))
@@ -37,24 +46,33 @@ def validate_street_number(street_number: str) -> tuple[bool, str]:
     print(numbers)
 
 
-def validate_postcode(postcode: int) -> tuple[bool, int]:
+def validate_postcode(postcode: int) -> bool:
     """Return tuple with boolean and error message as a string"""
     print("not finished")
 
 
-def validate_city(city: str) -> tuple[bool, str]:
-    """Return tuple with boolean and error message as a string"""
+def validate_city(city: str) -> bool:
+    """Return True if it is a valid city"""
     print("not finished")
+    pass
 
 
-def validate_TelNr(TelNr: str) -> tuple[bool, str]:
-    """Return tuple with boolean and error message as a string"""
+def validate_telnum(TelNr: str) -> bool | str:
+    """Return False if the phonenumber is invalid\n\nReturn True"""
     print("not finsihed")
+    pass
 
 
-def validate_email(email: str) -> tuple[bool, str]:
-    """Return tuple with boolean and error message as a string"""
+def validate_email(email: str) -> bool | str:
+    """Return False if the email is invalid\n\nReturn True"""
     print("not finished")
+    pass
+
+
+def validate_url(url: str) -> bool | str:
+    """Return False if the url is invalid\n\nReturn True"""
+    print("not finished")
+    pass
 
 
 # validate_street_number("33-37/12/17")

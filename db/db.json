@@ -14,7 +14,8 @@
           "number": 94,
           "postcode": 9782,
           "city": "Nikolsdorf"
-        }
+        },
+        "id": 0
       },
       {
       "telnum": "12341234",
@@ -28,7 +29,8 @@
           "number": 127,
           "postcode": 1111,
           "city": "Wien"
-        }
+        },
+        "id": 1
       }
     ]
   }

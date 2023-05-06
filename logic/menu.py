@@ -19,6 +19,5 @@ def menu():
     db.db_log_on()
     main_loop = True
     while main_loop:
-        # if administraton:
         course_administration(db)
 
