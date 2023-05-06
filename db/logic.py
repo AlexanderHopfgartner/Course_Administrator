@@ -3,10 +3,9 @@ from course_administrator.couse_administrator import Member
 
 class DB:
 
-    last_id = 0
-
-    def __init__(self):
-        self.members: list[Member] = []
+    def db_add(self):
+        # TODO 3.3 add Member to members
+        pass
 
     def db_log_on(self):
         with open("db/db.json", "r") as db_json:
@@ -18,10 +17,11 @@ class DB:
         pass
 
 
-    def db_log_out(self):
+    def db_save(self):
         # TODO 3.2 save all members to a json
         pass
 
-    def db_add(self):
-        # TODO 3.3 add Member to members
-        pass
+    last_id = 0
+
+    def __init__(self):
+        self.members: list[Member] = []
