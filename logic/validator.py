@@ -1,5 +1,6 @@
-# TODO 3. create all validation checks
+from consts import INPUT_END
 
+# TODO 3. create all validation checks
 """########################################################################################################################
 ich hab etwas die validater abgändert kannst du sie zum funktionieren bringe.
 Sie müssen in den meisten fällen NUR True zurück geben.
@@ -32,63 +33,81 @@ ich hab den code für db_log_on geschrieben um die DB nutzen zu können und um s
 und damit du etwa beispiel code dafür hast
 ########################################################################################################################"""
 def validate_name(name: str) -> bool:
-    """Return True if the name is valid
-
-       if name invalid print an error message.
-    """
+    """Return True if the name is valid\n Returns False otherwise"""
     for name in name.split():
         if name.isalpha():
-            print("The name is valid")
             return True
-    print("The name entered is not correct\nOnly letters and spaces are allowed\n")
+    print(f"The name entered: '{name}' is not correct\nOnly letters and spaces are allowed\n")
+    return False
 
 
 def validate_address_name(address_name: str) -> bool:
-    """Return False if the address_name is invalid\n\nReturn True"""
-    if type(address_name) == str:
-        return True, "The address name is valid"
-    return False, "The address name is not valid\nOnly letters and spaces are allowed"
+    """Return True if address_name is valid\nReturns False otherwise"""
+    if len(address_name)> 1:
+        new_address = address_name
+        address = new_address.split(' ')
+        if address[0].isalpha() and address[-1].isalpha() and len(address)>1:
+            print("Im IF IF IF IF IF")
+            print(address[0], address[-1])
+            if input(f"Is this address name: '{address_name}' correct?{INPUT_END}").lower()[0] == "y":
+                return True
+    if len(address_name) > 1:
+        if address_name.isalpha():
+            if input(f"Is this address name: '{address_name}' correct?{INPUT_END}").lower()[0] == "y":
+                return True
+    print(f"The address name: {address_name} is not valid\nOnly letters and spaces are allowed")
+    return False
 
 
 def validate_street_number(street_number: str) -> bool:
-    """Return False if the street_number is invalid\n\nReturn True"""
-    new_list = []
+    """Return True if street_number is valid\n Returns False otherwise"""
     numbers = street_number.split('/')
-    print(numbers[0][0], type(int(numbers[0][0])))
-    print(numbers[0][-1], type(int(numbers[0][-1])))
-
-    if type(int(numbers[0][0])) == int and type(int(numbers[0][-1])) == int:
-        print("Bin im IF drinnen", "")
-        # new_list.append(int(num))
-        # print(new_list)
-        # print("Please enter your streetnumber in this format:\n123-124/12/1")
-    print(numbers)
-    # return True
-    pass
+    try:
+        if type(int(numbers[0][0])) == int and type(int(numbers[0][-1])) == int:
+            return True
+    except ValueError:
+        print("Please enter your streetnumber in this format:\n123-456/78/9")
+        return False
+    print("Please enter your streetnumber in this format:\n123-456/78/9")
+    return False
 
 
-def validate_postcode(postcode: str) -> bool:
-    """Return tuple with boolean and error message as a string"""
-    print("not finished")
-    # return True
+def validate_postcode(postcode: int) -> bool:
+    """Return True if it is a valid postcode\n Returns False otherwise"""
+    if postcode > 1009 and postcode < 9991:
+        return True
+    print(f"Your entered Postcode: {postcode} is invalid. Please enter a number between 1010 - 9990!")
+    return False
 
 
 def validate_city(city: str) -> bool:
-    """Return True if it is a valid city"""
-    print("not finished")
-    # return True
-    pass
+    """Return True if it is a valid city\n Returns False otherwise"""
+    new_city = city.split()
+    if len(new_city) > 1:
+        if city[0].isalpha() and city[-1].isalpha():
+            return True
+    if city.isalpha():
+        return True
+    print(f"Your entered City: {city} is invalid. Please only enter letters and spaces.")
+    return False
 
 
 def validate_telnum(telnum: str) -> bool | str:
-    """Return False if the phonenumber is invalid\n\nReturn True"""
-    print("not finsihed")
-    # return telnum
-    pass
+    """Retruns True if telnum is valid\n Returns False otherwise"""
+    print("telnum[0]:", telnum[0])
+    if telnum[0] == "+":
+        print("length:", len(telnum))
+        print(telnum[9:11])
+        new_tel = telnum[0:6]+ " " + telnum[6:9] + " " + telnum[9:11] + " " + telnum[11:13]
+        print("new Tel:", new_tel)
+    elif telnum[0] == "0":
+        print("length:", len(telnum))
+        print()
+
 
 
 def validate_email(email: str) -> bool | str:
-    """Return False if the email is invalid\n\nReturn True"""
+    """Return True if email is valid\n Returns False otherwise"""
     print("not finished")
     # return email
     pass
@@ -96,13 +115,41 @@ def validate_email(email: str) -> bool | str:
 
 
 def validate_url(url: str) -> bool | str:
-    """Return False if the url is invalid\n\nReturn True"""
+    """Return True if url is valid\n Returns False otherwise"""
     print("not finished")
     # return url
     pass
 
+liste = ["a"]
 
-# validate_street_number("33-37/12/17")
-validate_name("Melcher Christoph")
-validate_name("Melche***")
-validate_name("Mel1234")
+validate_telnum("+436602736800")
+print("".center(80,'*'))
+validate_telnum("06602736800")
+"""print("##################### Name ############################")
+
+print(validate_name("Melcher Christoph"))
+print(validate_name("Melche***"))
+print(validate_name("Mel1234"))
+print("##################### street_address_name ############################")
+print(validate_address_name("Penzinger Straße"))
+print(validate_address_name("12345567"))
+print(validate_address_name("Penzinger %%Straße"))
+print("###################### Street_number ###########################")
+print(validate_street_number("100-104/21/17"))
+print(validate_street_number("2"))
+print(validate_street_number("33"))
+print(validate_street_number("dreiunddreißig Strich zwei strich"))
+
+print("##################### postcode ############################")
+print(validate_postcode(10000))
+print(validate_postcode(133))
+print(validate_postcode(1330))
+print("#########################City check########################")
+print(validate_city("TEST City"))
+print(validate_city("New Jersey"))
+print(validate_city("Vienna"))
+
+print(validate_city("1 City"))
+print(validate_city("New 1"))
+print(validate_city("Vienna!"))
+"""
