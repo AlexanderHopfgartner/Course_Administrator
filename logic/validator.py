@@ -123,7 +123,7 @@ def validate_url(url: str) -> bool | str:
 liste = ["a"]
 
 validate_telnum("+436602736800")
-print("".center(80,'*'))
+print("new number".center(40,'*'))
 validate_telnum("06602736800")
 """print("##################### Name ############################")
 
