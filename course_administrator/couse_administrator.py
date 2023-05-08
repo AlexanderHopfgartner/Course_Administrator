@@ -25,7 +25,7 @@ class Member(Address, object):
         self.id = Member.id
         self.first_name = kwargs["f_name"]
         self.name = kwargs["name"]
-        self.full_name = self.first_name + " " + self.name
+        self.full_name = self.rename()
         self.role = kwargs["role"]
         address = [item for item in kwargs["address"].values()]
         super().__init__(address)
@@ -36,8 +36,19 @@ class Member(Address, object):
             self.email = None
         self.email = email
         if url:
-           self.url = None
+            self.url = None
         self.url = url
+        self.output = self.structure()
+
+    def display_address(self):
+        return f"|{self.address_name} {self.street_number}, {self.postcode} {self.city}|"
+
+    def rename(self):
+        return self.first_name + " " + self.name
+
+    def restructure(self):
+        print("restructure")
+        self.full_name = self.rename()
         self.output = self.structure()
 
     def structure(self):
@@ -54,8 +65,7 @@ class Member(Address, object):
                 line += "  Url.: " + str(self.url)
             else:
                 line += "\t\t\t\tUrl.: " + str(self.url)
-        return f"{self.full_name}: {self.role}, lives at |{self.address_name} {self.street_number}," \
-               f"{self.postcode} {self.city}|" + f"{line:>80} "
+        return f"{self.full_name}: {self.role}, lives at {self.display_address()}" + f"{line:>80} "
 
     def __str__(self):
         return self.output
@@ -76,10 +86,7 @@ def course_administration(db, user):
 
     Return q!"""
 
-
     from course_administrator.member_edit import find_edit_user, edit
-
-
 
     db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
                              address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
@@ -93,10 +100,10 @@ def course_administration(db, user):
     while key != "q!":
         key = input(f"Enter \"Help\" for help.{INPUT_END}")
         if key.lower()[0] == "h":
-           if user.id == 0:
+            if user.id == 0:
                 print(f"[h/Help]: Help:\tSee all current options\n[v/View]: View:\tshow all user\n[a/Add]: Add: "
-                      f"Add a member to the DataBase\n[d/Del] Delete:\tRemove a Member by ID/full_name "
-                      f"form the DataBase\n[s/Save] Save:\tSave the current Database to the local")
+                      f"Add a member to the DataBase\n[d/Del] Delete:\tRemove a Member by ID/full_name form the "
+                      f"DataBase\n[s/Save] Save:\tSave the current Database to the local")
             else:
                 print(f"[h/Help]: Help:\tSee all current options\n[v/View]: View:\tshow all user")
         if key.lower()[0] == "v":
@@ -115,7 +122,6 @@ def course_administration(db, user):
             else:
                 print("invalid")
 
-
             pass
         if user.id == 0 and key.lower()[0] == "d":
             print("delete")
@@ -131,6 +137,7 @@ def course_administration(db, user):
     if key == "!q":
         if input(f"Did you save, last change!\nDo you want do leave [yes/no]{INPUT_END}") == "y":
             return key
+
 
 def add_member():
     if input(f"Do you want to add a member? [yes/no]:\n{INPUT_END}", ).lower()[0] == "y":
