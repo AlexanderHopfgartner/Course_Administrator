@@ -1,3 +1,5 @@
+from enum import member
+
 from course_administrator.couse_administrator import Member
 from course_administrator.member_form import get_role
 from consts import INPUT_END
@@ -10,6 +12,7 @@ def find_edit_user(db) -> Member | None:
         edit = input(f"Do you want to edit by \"ID\" or \"full_name\".[\"q!\" ot leave]{INPUT_END}").lower()[0]
         while edit == "i":
             edit_user = []
+            [print(member) for member in db.members]
             edit_key = input(f"Please enter the \"ID\".{INPUT_END}")
             try:
                 edit_user = [member for member in db.members if member.id == int(edit_key)]
@@ -36,6 +39,7 @@ def find_edit_user(db) -> Member | None:
 
         while edit == "f":
             edit_user = []
+            [print(member) for member in db.members]
             edit_key = input(f"Please enter the \"full_name\".{INPUT_END}")
             edit_user = [member for member in db.members if member.full_name == edit_key]
             if not edit_user:
@@ -68,7 +72,7 @@ def edit(member: Member):
     while editing:
         print(member)
         edit_key = input(f"Please Enter the information want to change\n"
-                         f"[first_name/name/role/address/telnum/email/url]{INPUT_END}").lower()[0]
+                         f"[first_name/name/role/address/telnum/email/url/q]{INPUT_END}").lower()[0]
         if edit_key == "f":
             edit_input = input(f"Change {member.first_name} to:{INPUT_END}")
             if validate_name(edit_input):
@@ -100,8 +104,21 @@ def edit(member: Member):
                 edit_input = input(f"Change {member.city} to:{INPUT_END}")
                 if validate_city(edit_input):
                     member.city = edit_input
-            if edit_key == "q!":
-                edit_key = ""
+        if edit_key == "t":
+            edit_input = input(f"Change {member.telnum if member.telnum else 'TelephoneNumber'} to:{INPUT_END}")
+            if validate_telnum(edit_input):
+                member.telnum = edit_input
+        if edit_key == "u":
+            edit_input = input(f"Change {member.url if member.url else 'Url'} to{INPUT_END}")
+            if validate_url(edit_input):
+                member.url = edit_input
+        if edit_key == "e":
+            edit_input = input(f"Change {member.email if member.email else 'Email'} to : {INPUT_END}")
+            if validate_email(edit_input):
+                member.email = edit_input
+        member.restructure()
+        if edit_key == "q":
+            editing = False
 
 
 
