@@ -42,24 +42,7 @@ def member_form() -> dict:
                 form["name"] = name
 
         while form["role"] is None:
-            ###########################################  hilfe  ######################################################
-            role = input(f"Please Enter Role.\n"
-                         f"['Ter' = Teilnehmer:in/ {'TXX'} = {'das weiß ich nicht mehr'}/ {'XXX'} ="
-                         f" {'keine ahnung'}]{INPUT_END}")
-            print(role[0:4])
-            if role[0:4] == "Ter":
-                if input(f"Is Teilnehmer:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-                    form["role"] = "Teilnehmer:in"
-                    continue
-            if role[0:4] == "Ler":
-                if input(f"Is Lektor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-                    form["role"] = "Lektor:in"
-                    continue
-            if role[0:4] == "Tur":
-                if input(f"Is Tutor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-                    form["role"] = "Tutor:in"
-                    continue
-            print("Sorry not a role in the list.")
+            form["role"] = get_role()
 
         while form["address"]["address_name"] is None and form["address"]["number"] is None and\
                 form["address"]["postcode"] is None and form["address"]["city"] is None:
@@ -106,3 +89,20 @@ def member_form() -> dict:
                 form["url"] = validate_url(url)
 
     return form
+
+
+def get_role():
+    role = input(f"Please Enter Role.\n"
+                 f"['Ter' = Teilnehmer:in/ 'Ler' = Lektor:in/ 'Tur' = Tutor:in]{INPUT_END}")
+    print(role[0:4])
+    if role[0:4] == "Ter":
+        if input(f"Is Teilnehmer:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
+            return "Teilnehmer:in"
+    if role[0:4] == "Ler":
+        if input(f"Is Lektor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
+            return "Lektor:in"
+
+    if role[0:4] == "Tur":
+        if input(f"Is Tutor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
+            return "Tutor:in"
+    print("Sorry not a role in the list.")
