@@ -10,14 +10,11 @@ class DB:
             self.members += [Member(**data) for data in db_read["ids"]["members"]]
             Member.id = db_read["ids"]["last_id"]
         # TODO 3.1 by log to the local db set Member.id = db_read.ids.last_id
-        # and update the Member.id = db_read.ids.last_id
 
 
     def db_save(self):
         # TODO 3.2 save all members to a json
         pass
-
-    last_id = 0
 
     def __init__(self):
         self.members: list[Member] = []
