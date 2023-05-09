@@ -44,6 +44,24 @@ class Member(Address, object):
     def display_address(self):
         return f"|{self.address_name} {self.street_number}, {self.postcode} {self.city}|"
 
+    def _form(self):
+        return {"telnum": self.telnum,
+                "email": self.email,
+                "url": self.url,
+                "f_name": self.first_name,
+                "name": self.name,
+                "role": self.role,
+                "address":
+                    {
+                        "address_name": self.address_name,
+                        "number": self.street_number,
+                        "postcore": self.postcode,
+                        "city": self.city
+                    },
+                "id": self.id
+
+                }
+
     def rename(self):
         return self.first_name + " " + self.name
 
@@ -91,11 +109,11 @@ def course_administration(db, user) -> str | None:
 
     from course_administrator.member_edit import find_user, edit
 
-    db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
+    db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer:in",
                              address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
                                       "city": "Nikolsdorf"}))
     db.members.append(Member(telnum="123123123", email="email@email.com", url="Website.com",
-                             f_name="Milch", name="Milchiger", role="Teilnehmerin",
+                             f_name="Milch", name="Milchiger", role="Teilnehmer:in",
                              address={"address_name": "Nikl", "number": 92, "postcode": 1110,
                                       "city": "Wien"}))
     print(f"welcome in the DataBase administration. {user.full_name}")
