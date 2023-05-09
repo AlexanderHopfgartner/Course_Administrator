@@ -109,10 +109,10 @@ def course_administration(db, user) -> str | None:
                       f"[c/Clear]: Clear\tClears the console.\n[d/Del] Delete:\tRemove a Member by ID form "
                       f"the DataBase.\n[e/Edit] Edit:\t Edit a Member by ID from the DataBase\n"
                       f"[s/Save] Save:\tSave the current Database to the local.\n[v / View]: View:\tshow"
-                      f"all user on the DataBase")
+                      f"all user on the DataBase\n\n[q!] Log out: Logs out the current user")
             else:
                 print(f"[h/Help]: Help:\tSee all current options.\n\n[c/Clear]: Clear\tClears the console.\n[v/View]: "
-                      f"View:\tshow all user.")
+                      f"View:\tshow all user.\n\n[q!] Log out: Logs out the current user")
 
         if key.lower()[0] == "v":
             [print(member.id, ":\t", member) for member in db.members]
@@ -147,9 +147,11 @@ def course_administration(db, user) -> str | None:
             clear()
 
         if key == "q!":
-            if input(f"\n\n"
-                     f"Did you save, last change!\n\n\nDo you want do leave {yon}{INPUT_END}") == "y":
+            clear()
+            save_massage = "Did you save, last change!" if user.id == 0 else ""
+            if input(f"{save_massage}\n\n\nDo you want do leave {yon}{INPUT_END}") == "y":
                 return key
+            clear()
         key = ""
 
 
