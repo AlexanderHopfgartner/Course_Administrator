@@ -121,7 +121,3 @@ def edit(member: Member):
         member.restructure()
         if edit_key == "q":
             editing = False
-
-
-
-
