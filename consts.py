@@ -1,2 +1,1 @@
-INPUT_END = "\n>>>>>"
-HELP = ""
+INPUT_END = "\n>>>"
