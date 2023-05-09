@@ -108,14 +108,14 @@ def course_administration(db, user) -> str | None:
     Return q!"""
 
     from course_administrator.member_edit import find_user, edit
-
-    db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer:in",
-                             address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
-                                      "city": "Nikolsdorf"}))
-    db.members.append(Member(telnum="123123123", email="email@email.com", url="Website.com",
-                             f_name="Milch", name="Milchiger", role="Teilnehmer:in",
-                             address={"address_name": "Nikl", "number": 92, "postcode": 1110,
-                                      "city": "Wien"}))
+    #
+    # db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer:in",
+    #                          address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
+    #                                   "city": "Nikolsdorf"}))
+    # db.members.append(Member(telnum="123123123", email="email@email.com", url="Website.com",
+    #                          f_name="Milch", name="Milchiger", role="Teilnehmer:in",
+    #                          address={"address_name": "Nikl", "number": 92, "postcode": 1110,
+    #                                   "city": "Wien"}))
     print(f"welcome in the DataBase administration. {user.full_name}")
     key = ""
     while key != "q!":

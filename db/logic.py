@@ -14,7 +14,13 @@ class DB:
 
     def db_save(self):
         # TODO 3.2 save all members to a json
-        pass
+        member_list =[]
+        for member in self.members:
+            member_list.append(member._form())
+        json_dict = {"ids":{"last_id":Member.id,"members":member_list}}
+        print(json_dict)
+        with open("db/db.json", 'w') as file_object:  # open the file in write mode
+            json.dump(json_dict, file_object)  # json.dump() function to stores data in test.json file
 
     def __init__(self):
         self.members: list[Member] = []
