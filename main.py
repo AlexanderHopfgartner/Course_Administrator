@@ -1,4 +1,5 @@
 from logic.menu import menu
+from consts import INPUT_END, yon
 
 
 def main():
@@ -6,7 +7,8 @@ def main():
     while run:
         key = menu()
         if key == "q!":
-            run = False
+            if input(f"Logged out\n\nDo you want to log on again?\t{yon}{INPUT_END}").lower()[0] == "n":
+                run = False
     print("Closed")
 
 
