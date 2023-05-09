@@ -1,14 +1,14 @@
 {
   "ids": {
-    "last_id": 2,
+    "last_id": 3,
     "members": [
       {
         "telnum": "06803132323",
         "email": "al.ho.260@gmail.com",
-        "url": "Website.com",
+        "url": "www.Website.com",
         "f_name": "Alexander",
         "name": "Hopfgartner",
-        "role": "Teilnehmer",
+        "role": "Teilnehmer:in",
         "address": {
           "address_name": "Nikolsdorf",
           "number": "94",
@@ -20,10 +20,10 @@
       {
       "telnum": "06602736800",
         "email": "melcher.christoph@hotmail.com",
-        "url": "website.com",
+        "url": "www.website.com",
         "f_name": "Christoph",
         "name": "Melcher",
-        "role": "Teilnehmer",
+        "role": "Teilnehmer:in",
         "address": {
           "address_name": "Penzinger Straße",
           "number": "33",
@@ -31,7 +31,20 @@
           "city": "Wien"
         },
         "id": 0
-      }
+      },
+      {
+        "url": "www.lecker.com",
+        "f_name": "Kuchen",
+        "name": "Torte",
+        "role": "Lektor:in",
+        "address": {
+          "address_name": "Leckering",
+          "number": "12-13",
+          "postcode": 9990,
+          "city": "nichtWien"
+        },
+        "id": 3
+        }
     ]
   }
 }
