@@ -76,17 +76,18 @@ class Member(Address, object):
     def __call__(self, *args, **kwargs):
         return self.output
 
+
 # TODO 2. construct main loop
 
 user_list = []
 
 
-def course_administration(db, user):
+def course_administration(db, user) -> str | None:
     """Course_administrator main_loop
 
     Return q!"""
 
-    from course_administrator.member_edit import find_edit_user, edit
+    from course_administrator.member_edit import find_user, edit
 
     db.members.append(Member(url="Website.com", f_name="Alexander", name="Hopfgartner", role="Teilnehmer",
                              address={"address_name": "Nikolsdorf", "number": 94, "postcode": 9782,
@@ -98,45 +99,53 @@ def course_administration(db, user):
     print(f"welcome in the DataBase administration, {user.full_name}")
     key = ""
     while key != "q!":
-        key = input(f"Enter \"Help\" for help.{INPUT_END}")
+        while not key or not key.isalpha():
+            print(not key, key.isalpha())
+            key = input(f"Enter \"Help\" for help.{INPUT_END}")
+        print("key")
         if key.lower()[0] == "h":
             if user.id == 0:
-                print(f"[h/Help]: Help:\tSee all current options\n[v/View]: View:\tshow all user\n[a/Add]: Add: "
-                      f"Add a member to the DataBase\n[d/Del] Delete:\tRemove a Member by ID/full_name form the "
-                      f"DataBase\n[s/Save] Save:\tSave the current Database to the local")
+                print(f"[h/Help]: Help:\tSee all current options.\n\n[a/Add]: Add: Add a member to the DataBase.\n"
+                      f"[c/Clear]: Clear\tClears the console.\n[d/Del] Delete:\tRemove a Member by ID form "
+                      f"the DataBase.\n[e/Edit] Edit:\t Edit a Member by ID from the DataBase\n"
+                      f"[s/Save] Save:\tSave the current Database to the local.\n[v / View]: View:\tshow"
+                      f"all user on the DataBase")
             else:
-                print(f"[h/Help]: Help:\tSee all current options\n[v/View]: View:\tshow all user")
+                print(f"[h/Help]: Help:\tSee all current options.\n\n[c/Clear]: Clear\tClears the console.\n[v/View]: "
+                      f"View:\tshow all user.")
+
         if key.lower()[0] == "v":
-            pass
+            [print(member.id, ":\t", member) for member in db.members]
+
         if user.id == 0 and key.lower()[0] == "a":
             """Add a member"""
             new_member_form = add_member()
             if new_member_form:
                 db.members.append(Member(**new_member_form))
+
         if user.id == 0 and key.lower()[0] == "e":
             """Edit a member"""
-            edit_member = find_edit_user(db)
-            edit(edit_member)
-            if edit_member:
+            edit_member = find_user(db, "edit")
+            print("if")
+            if type(edit_member) == Member:
+                print("true")
                 print(edit_member)
-            else:
-                print("invalid")
 
-            pass
         if user.id == 0 and key.lower()[0] == "d":
-            print("delete")
             """Delete a member"""
-            pass
+            del_member = find_user(db, "delete")
+            if type(del_member) == Member:
+                db.members.pop(db.members.index(del_member))
+
         if user.id == 0 and key.lower()[0] == "s":
-            print("save")
             """save the DataBase"""
-            pass
+            db.db_save()
 
-        [print(mem) for mem in db.members]
-
-    if key == "!q":
-        if input(f"Did you save, last change!\nDo you want do leave [yes/no]{INPUT_END}") == "y":
-            return key
+        if key == "q!":
+            if input(f"\n\n"
+                     f"Did you save, last change!\n\n\nDo you want do leave [yes/no]{INPUT_END}") == "y":
+                return key
+        key = ""
 
 
 def add_member():
