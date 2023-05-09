@@ -1,4 +1,4 @@
-from consts import INPUT_END
+from consts import INPUT_END, yon
 
 
 def validate_name(name: str) -> bool:
@@ -18,11 +18,11 @@ def validate_address_name(address_name: str) -> bool:
         if address[0].isalpha() and address[-1].isalpha() and len(address) > 1:
             print("Im IF IF IF IF IF")
             print(address[0], address[-1])
-            if input(f"Is this address name: '{address_name}' correct?{INPUT_END}").lower()[0] == "y":
+            if input(f"Is this address name: '{address_name}' {yon}{INPUT_END}").lower()[0] == "y":
                 return True
     if len(address_name) > 1:
         if address_name.isalpha():
-            if input(f"Is this address name: '{address_name}' correct?{INPUT_END}").lower()[0] == "y":
+            if input(f"Is this address name: '{address_name}' {yon}{INPUT_END}").lower()[0] == "y":
                 return True
     print(f"The address name: {address_name} is not valid\nOnly letters and spaces are allowed\n")
     return False
@@ -96,7 +96,8 @@ def validate_telnum(telnum: str) -> bool | str:
                     return new_tel
     except ValueError:
         print(
-            f"The number: {telnum} is invalid. Please only enter numbers and you can add a '+' to the beginning for your country code\nExample:+43 6991 234 56 78\n")
+            f"The number: {telnum} is invalid. Please only enter numbers and you can add a '+' to the beginning "
+            f"for your country code\nExample:+43 6991 234 56 78\n")
         return False
     return False
 
@@ -147,7 +148,7 @@ def validate_url(url: str) -> bool | str:
             if list_url[0] == "ww":
                 list_url[0] = ""
             if not wo_wi_we_bool and tld_bool:
-                if input(f"Do you want to add 'www.' to your URL('{url}')?: ").lower()[0] == "y":
+                if input(f"Do you want to add 'www.' to your URL('{url}')? {yon}{INPUT_END}").lower()[0] == "y":
                     url = ""
                     if not list_url[0] == "www.":
                         url = world_wide_web + "."

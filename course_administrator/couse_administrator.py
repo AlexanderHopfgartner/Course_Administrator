@@ -1,6 +1,7 @@
-from consts import INPUT_END
+from consts import INPUT_END, yon
 from logic.validator import *
 from course_administrator.member_form import member_form
+import os
 
 
 class Address(object):
@@ -47,7 +48,6 @@ class Member(Address, object):
         return self.first_name + " " + self.name
 
     def restructure(self):
-        print("restructure")
         self.full_name = self.rename()
         self.output = self.structure()
 
@@ -77,7 +77,9 @@ class Member(Address, object):
         return self.output
 
 
-# TODO 2. construct main loop
+def clear():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
 
 user_list = []
 
@@ -96,13 +98,11 @@ def course_administration(db, user) -> str | None:
                              f_name="Milch", name="Milchiger", role="Teilnehmerin",
                              address={"address_name": "Nikl", "number": 92, "postcode": 1110,
                                       "city": "Wien"}))
-    print(f"welcome in the DataBase administration, {user.full_name}")
+    print(f"welcome in the DataBase administration. {user.full_name}")
     key = ""
     while key != "q!":
-        while not key or not key.isalpha():
-            print(not key, key.isalpha())
+        while not key or (not key.isalpha() and not key == "q!"):
             key = input(f"Enter \"Help\" for help.{INPUT_END}")
-        print("key")
         if key.lower()[0] == "h":
             if user.id == 0:
                 print(f"[h/Help]: Help:\tSee all current options.\n\n[a/Add]: Add: Add a member to the DataBase.\n"
@@ -129,7 +129,7 @@ def course_administration(db, user) -> str | None:
             print("if")
             if type(edit_member) == Member:
                 print("true")
-                print(edit_member)
+                edit(edit_member)
 
         if user.id == 0 and key.lower()[0] == "d":
             """Delete a member"""
@@ -140,16 +140,21 @@ def course_administration(db, user) -> str | None:
         if user.id == 0 and key.lower()[0] == "s":
             """save the DataBase"""
             db.db_save()
+            print("DataBase saved.")
+
+        if key.lower()[0] == "c":
+            """clear console"""
+            clear()
 
         if key == "q!":
             if input(f"\n\n"
-                     f"Did you save, last change!\n\n\nDo you want do leave [yes/no]{INPUT_END}") == "y":
+                     f"Did you save, last change!\n\n\nDo you want do leave {yon}{INPUT_END}") == "y":
                 return key
         key = ""
 
 
 def add_member():
-    if input(f"Do you want to add a member? [yes/no]:\n{INPUT_END}", ).lower()[0] == "y":
+    if input(f"Do you want to add a member? {yon}:\n{INPUT_END}", ).lower()[0] == "y":
         return member_form()
     else:
         return

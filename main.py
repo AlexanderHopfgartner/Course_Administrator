@@ -7,6 +7,7 @@ def main():
         key = menu()
         if key == "q!":
             run = False
+    print("Closed")
 
 
 if __name__ == "__main__":

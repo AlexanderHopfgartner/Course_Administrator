@@ -1,6 +1,6 @@
 from consts import INPUT_END
 from db.logic import DB
-from course_administrator.couse_administrator import course_administration, Member
+from course_administrator.couse_administrator import course_administration, Member, clear
 
 """Module = main menu => sub menus: check Users,
                                     add User, -> validate
@@ -26,8 +26,10 @@ def menu():
                 if member.full_name == user_name:
                     if input(f"{member}\nIDNumber is: {member.id}\tis this you? [yes/no]{INPUT_END}").lower()[0] == "y":
                         user = member
+                        clear()
                         print(f"{member.first_name} is logged on")
-            print("User not found!\n\n")
+            if type(user) != Member:
+                print("User not found!\n\n")
 
         key = course_administration(db, user)
         if key == "q!":
