@@ -1,5 +1,79 @@
 from consts import INPUT_END, yon
+def change_letters(text:str) -> str:  # Function for replacing ß->ss, ä->ae, ü->ue and ö->oe
+    special_chars = ['ä', 'ü', 'ö', 'ß']
+    text = text.lower()
+    for char in special_chars:
+        if char in text:
+            match char: # match case to check for the letter that needs to be changed
+                case 'ß': # change ß to ss
+                    split_word = text.split('ß')
+                    new_text = ""
+                    for i in range(len(split_word)):
+                        if len(split_word) == 2:
+                            new_text += split_word[0] + 'ss' + split_word[-1]
+                            break
+                        elif len(split_word) == i + 1:
+                            new_text += split_word[-1]
+                        else:
+                            new_text += split_word[i] + 'ss'
+                    text = new_text
+                case 'ä':
+                    split_word = text.split('ä')
+                    new_text = ""
+                    for i in range(len(split_word)):
+                        if len(split_word) == 2:
+                            new_text += split_word[0] + 'ae' + split_word[-1]
+                            break
+                        elif len(split_word) == i + 1:
+                            new_text += split_word[-1]
+                        else:
+                            new_text += split_word[i] + 'ae'
+                    text = new_text
+                case 'ü':
+                    split_word = text.split('ü')
+                    new_text = ""
+                    for i in range(len(split_word)):
+                        if len(split_word) == 2:
+                            new_text += split_word[0] + 'ue' + split_word[-1]
+                            break
+                        elif len(split_word) == i + 1:
+                            new_text += split_word[-1]
+                        else:
+                            new_text += split_word[i] + 'ue'
+                    text = new_text
+                case 'ö':
+                    split_word = text.split('ö')
+                    new_text = ""
+                    for i in range(len(split_word)):
+                        if len(split_word) == 2:
+                            new_text += split_word[0] + 'oe' + split_word[-1]
+                            break
+                        elif len(split_word) == i + 1:
+                            new_text += split_word[-1]
+                        else:
+                            new_text += split_word[i] + 'oe'
+                    text = new_text
+    # Checks if any special character is left inside the text, if not it returns the changed string
+    if special_chars[0] not in text and \
+       special_chars[1] not in text and \
+       special_chars[2] not in text and \
+       special_chars[3] not in text:
+        return text
 
+# print("Changed Letters :",change_letters("Teßt"))
+# print("Changed Letters :",change_letters("spaßeß"))
+# print("Changed Letters :",change_letters("spaßeßeßß"))
+# print("Changed Letters :",change_letters("ßßßß"))
+#
+# print("Changed Letters :",change_letters("äpfel"))
+# print("Changed Letters :",change_letters("ääh"))
+# print("Changed Letters :",change_letters("Gärtnerstraße"))
+# print("Changed Letters :",change_letters("Vorgärtnerlücke"))
+#
+# print("Changed Letters :",change_letters("Längen Möbe"))
+# print("Changed Letters :",change_letters("Läöüß"))
+# print("Changed Letters :",change_letters("Pöbäl"))
+# print("Changed Letters :",change_letters("Iß däß äin dümmer Sätzö, dü Bößä Mänßch"))
 
 def validate_name(name: str) -> bool:
     """Return True if the name is valid\n Returns False otherwise"""
