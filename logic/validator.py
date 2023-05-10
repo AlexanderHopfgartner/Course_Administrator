@@ -3,6 +3,8 @@ from consts import INPUT_END, yon
 
 def validate_name(name: str) -> bool:
     """Return True if the name is valid\n Returns False otherwise"""
+    if not name:
+        return False
     for name in name.split():
         if name.isalpha():
             return True
@@ -12,6 +14,8 @@ def validate_name(name: str) -> bool:
 
 def validate_address_name(address_name: str) -> bool:
     """Return True if address_name is valid\nReturns False otherwise"""
+    if not address_name:
+        return False
     if len(address_name) > 1:
         new_address = address_name
         address = new_address.split(' ')
@@ -30,6 +34,8 @@ def validate_address_name(address_name: str) -> bool:
 
 def validate_street_number(street_number: str) -> bool:
     """Return True if street_number is valid\n Returns False otherwise"""
+    if not street_number:
+        return False
     numbers = street_number.split('/')
     try:
         if type(int(numbers[0][0])) == int and type(int(numbers[0][-1])) == int:
@@ -43,6 +49,8 @@ def validate_street_number(street_number: str) -> bool:
 
 def validate_postcode(postcode: str) -> bool:
     """Return True if it is a valid postcode\n Returns False otherwise"""
+    if not postcode:
+        return False
     try:
         postcode = int(postcode)
     except ValueError:
@@ -57,6 +65,8 @@ def validate_postcode(postcode: str) -> bool:
 
 def validate_city(city: str) -> bool:
     """Return True if it is a valid city\n Returns False otherwise"""
+    if not city:
+        return False
     new_city = city.split()
     if len(new_city) > 1:
         if city[0].isalpha() and city[-1].isalpha():
@@ -69,6 +79,8 @@ def validate_city(city: str) -> bool:
 
 def validate_telnum(telnum: str) -> bool | str:
     """Retruns True if telnum is valid\n Returns False otherwise"""
+    if not telnum:
+        return False
     telnum2 = telnum.split(' ')
     try:
         if len(telnum2) > 1:
@@ -104,6 +116,8 @@ def validate_telnum(telnum: str) -> bool | str:
 
 def validate_email(email: str) -> bool | str:
     """Return True if email is valid\n Returns False otherwise"""
+    while not email or email :
+        return False
     tld_bool, domain_bool = False, False
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ru", "ua", "au", "in", "ir", "net"]
     domain_check = ["hotmail", "gmail", "gmx", "sms", "yahoo", "fh-campuswien", "live", "outlook", "AOL", "Zoho",
@@ -132,6 +146,8 @@ def validate_email(email: str) -> bool | str:
 
 
 def validate_url(url: str) -> bool | str:
+    if not url:
+        return False
     url = url.lower()
     tld_bool = False
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ua", "ru", "au", "in", "ir", "net"]
