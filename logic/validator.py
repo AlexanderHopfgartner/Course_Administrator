@@ -1,11 +1,17 @@
 from consts import INPUT_END, yon
-def change_letters(text:str) -> str:  # Function for replacing ß->ss, ä->ae, ü->ue and ö->oe
+
+
+def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, ü->ue and ö->oe
+    """Takes a string and checks it for ä, ö, ü and ß.
+    Each gets replaced with a 'normal' letter"""
+    if not text:
+        return text
     special_chars = ['ä', 'ü', 'ö', 'ß']
     text = text.lower()
     for char in special_chars:
         if char in text:
-            match char: # match case to check for the letter that needs to be changed
-                case 'ß': # change ß to ss
+            match char:  # match case to check for the letter that needs to be changed
+                case 'ß':  # change ß to ss
                     split_word = text.split('ß')
                     new_text = ""
                     for i in range(len(split_word)):
@@ -55,10 +61,11 @@ def change_letters(text:str) -> str:  # Function for replacing ß->ss, ä->ae, �
                     text = new_text
     # Checks if any special character is left inside the text, if not it returns the changed string
     if special_chars[0] not in text and \
-       special_chars[1] not in text and \
-       special_chars[2] not in text and \
-       special_chars[3] not in text:
+            special_chars[1] not in text and \
+            special_chars[2] not in text and \
+            special_chars[3] not in text:
         return text
+
 
 # print("Changed Letters :",change_letters("Teßt"))
 # print("Changed Letters :",change_letters("spaßeß"))
@@ -190,7 +197,7 @@ def validate_telnum(telnum: str) -> bool | str:
 
 def validate_email(email: str) -> bool | str:
     """Return True if email is valid\n Returns False otherwise"""
-    while not email or email :
+    while not email or email:
         return False
     tld_bool, domain_bool = False, False
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ru", "ua", "au", "in", "ir", "net"]
