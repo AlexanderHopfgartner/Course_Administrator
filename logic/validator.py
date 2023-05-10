@@ -64,6 +64,13 @@ def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, 
             special_chars[1] not in text and \
             special_chars[2] not in text and \
             special_chars[3] not in text:
+        new_text = text.split(' ')
+        text = ""
+        for word in new_text:
+            if word == new_text[-1]:
+                text += word.capitalize()
+            else:
+                text += word.capitalize() + ' '
         return text
 
 
