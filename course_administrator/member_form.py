@@ -1,8 +1,8 @@
 from logic.validator import *
-from consts import INPUT_END
+from consts import INPUT_END, clear, Form, AddressForm
 
 
-def member_form() -> dict:
+def fill_member_form() -> Form:
     """Return a form for Member:
     f_name: requite
     name: requite
@@ -15,94 +15,95 @@ def member_form() -> dict:
     telnum: optional
     email: optional
     url: optional"""
-    form = {
-        "telnum": None,
-        "email": None,
-        "url": None,
-        "f_name": None,
-        "name": None,
-        "role": None,
-        "address": {
-            "address_name": None,
-            "number": None,
-            "postcode": None,
-            "city": None
-        }
-    }
-    while form["f_name"] is None and form["name"] is None and form["role"] is None:
+    f_name = ""
+    name = ""
+    address_name = ""
+    number = ""
+    postcode = ""
+    city = ""
+    telnum = ""
+    email = ""
+    url = ""
 
-        while form["f_name"] is None:
-            f_name = input(f"Please Enter first name.{INPUT_END}")
-            if validate_name(f_name):
-                form["f_name"] = f_name
+    while not validate_name(f_name):
+        f_name = input(f"Please Enter first name.{INPUT_END}")
+    while not validate_name(name):
+        name = input(f"Please Enter sirname.{INPUT_END}")
+    clear()
 
-        while form["name"] is None:
-            name = input(f"Please Enter name.{INPUT_END}")
-            if validate_name(name):
-                form["name"] = name
+    role = get_role()
+    clear()
 
-        while form["role"] is None:
-            form["role"] = get_role()
+    while not validate_address_name(address_name):
+        address_name = input(f"Please enter name of the street.{INPUT_END}")
+    while not validate_street_number(number):
+        number = input(f"Please Enter street number{INPUT_END}")
+    while not validate_postcode(postcode):
+        postcode = input(f"Please Enter postcode{INPUT_END}")
+    while not validate_city(city):
+        city = input(f"Please Enter city name{INPUT_END}")
+    clear()
 
-        while form["address"]["address_name"] is None and form["address"]["number"] is None and\
-                form["address"]["postcode"] is None and form["address"]["city"] is None:
+    telnum = input(f"Please Enter your Phonenumber (OPTIONAL) ['number'/'no']{INPUT_END}")
+    if telnum[0].lower() == "n":
+        telnum = False
+    else:
+        telnum = validate_telnum(telnum)
 
-            while form["address"]["address_name"] is None:
-                address_name = input(f"Please Enter name of the street{INPUT_END}")
-                if validate_address_name(address_name):
-                    form["address"]["address_name"] = address_name
+    email = input(f"Please Enter your email (OPTIONAL) ['email'/'no']{INPUT_END}")
+    if email[0].lower() == "n":
+        email = False
+    else:
+        email = validate_email(email)
 
-            while form["address"]["number"] is None:
-                street_number = input(f"Please Enter street number{INPUT_END}")
-                if validate_street_number(street_number):
-                    form["address"]["number"] = street_number
+    url = input(f"Please Enter your URL (OPTIONAL) ['URL'/'no']{INPUT_END}")
+    if url[0].lower() == "n":
+        url = False
+    else:
+        url = validate_url(url)
 
-            while form["address"]["postcode"] is None:
-                postcode = input(f"Please Enter postcode{INPUT_END}")
-                if validate_postcode(postcode):
-                    form["address"]["postcode"] = int(postcode)
+    address, form = dict(), dict()
+    for key in dir():
+        value = eval(key)
+        if key == "address_name" or key == "number" or key == "postcode" or key == "city":
+            address[key] = value
+        else:
+            form[key] = value
 
-            while form["address"]["city"] is None:
-                city = input(f"Please Enter city name{INPUT_END}")
-                if validate_city(city):
-                    form["address"]["city"] = city
+    address, form = dict(), dict()
 
-        if form["telnum"] is None:
-            number = input(f"Please Enter your Phonenumber (OPTIONAL) ['number'/'no']{INPUT_END}")
-            if number[0].lower() == "n":
-                form["telnum"] = False
-            else:
-                form["telnum"] = validate_telnum(number)
+    for key in dir():
+        if key == "form" or key == address:
+            continue
+        value = eval(key)
+        if key == "address_name" or key == "number" or key == "postcode" or key == "city":
+            address[key] = value
+        else:
+            form[key] = value
+    formiii = Form(**form)
+    print(formiii)
+    return formiii
 
-        if form["email"] is None:
-            email = input(f"Please Enter your email (OPTIONAL) ['email'/'no']{INPUT_END}")
-            if email[0].lower() == "n":
-                form["email"] = False
-            else:
-                form["email"] = validate_email(email)
 
-        if form["url"] is None:
-            url = input(f"Please Enter your URL (OPTIONAL) ['URL'/'no']{INPUT_END}")
-            if url[0].lower() == "n":
-                form["url"] = False
-            else:
-                form["url"] = validate_url(url)
-
-    return form
+roles = ["Teilnehmer:in", "Lektor:in", "Tutor:in"]
 
 
 def get_role():
-    role = input(f"Please Enter Role.\n"
-                 f"['Ter' = Teilnehmer:in/ 'Ler' = Lektor:in/ 'Tur' = Tutor:in]{INPUT_END}")
-    print(role[0:4])
-    if role[0:4] == "Ter":
-        if input(f"Is Teilnehmer:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-            return "Teilnehmer:in"
-    if role[0:4] == "Ler":
-        if input(f"Is Lektor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-            return "Lektor:in"
+    while True:
+        role = input(f"Please Enter Role.\n"
+                     f"{[role for role in roles]}{INPUT_END}")
+        short_role = role[0:4]
+        for index in range(len(role)):
+            if short_role == "Tei" or short_role == "tei":
+                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+                    return roles[0]
 
-    if role[0:4] == "Tur":
-        if input(f"Is Tutor:in right? [yes/no]{INPUT_END}").lower()[0] == "y":
-            return "Tutor:in"
-    print("Sorry not a role in the list.")
+            if short_role == "Lek" or short_role == "lek":
+                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+                    return roles[1]
+
+            if short_role == "Tut" or short_role == "tut":
+                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+                    return roles[2]
+
+        print("Sorry not a role in the list.")
