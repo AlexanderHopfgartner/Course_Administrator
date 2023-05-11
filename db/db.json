@@ -25,7 +25,7 @@
         "name": "Melcher",
         "role": "Teilnehmer:in",
         "address": {
-          "address_name": "Penzinger Stra\u00c3\u0178e",
+          "address_name": "Penzinger Straße",
           "number": "33",
           "postcode": 1140,
           "city": "Wien"
@@ -70,7 +70,7 @@
         "name": "Torte",
         "role": "Tutor:in",
         "address": {
-          "address_name": "Favoritenstra\u00c3\u0178e",
+          "address_name": "Favoritenstraße",
           "number": "34/6",
           "postcode": 9990,
           "city": "Vienna"
@@ -97,7 +97,7 @@
         "email": false,
         "url": "www.super.com",
         "f_name": "Katharina",
-        "name": "Esterhßzy",
+        "name": "Esterházy",
         "role": "Lektor:in",
         "address": {
           "address_name": "Hofburg",
