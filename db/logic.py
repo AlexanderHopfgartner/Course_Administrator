@@ -17,7 +17,7 @@ class DB:
             member_list.append(member.member_form())
         json_dict = {"ids": {"last_id": Member.id, "members": member_list}}
         with codecs.open("db/db.json", 'w', encoding="utf-8") as file_object:  # open the file in write mode
-            json.dump(json_dict, file_object)  # json.dump() function to stores data in test.json file
+            json.dump(json_dict, file_object, ensure_ascii=False)  # json.dump() function to stores data in test.json file
 
     def __init__(self):
         self.members: list[Member] = []
