@@ -3,7 +3,7 @@ from consts import INPUT_END, yon
 
 def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, ü->ue and ö->oe
     """Takes a string and checks it for ä, ö, ü and ß.
-    Each gets replaced with a 'normal' letter"""
+    Each gets replaced with 'normal' letters"""
     if not text:
         return text
     special_chars = ['ä', 'ü', 'ö', 'ß']
@@ -82,7 +82,7 @@ def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, 
 # print("Changed Letters :",change_letters("äpfel"))
 # print("Changed Letters :",change_letters("ääh"))
 # print("Changed Letters :",change_letters("Gärtnerstraße"))
-# print("Changed Letters :",change_letters("Vorgärtnerlücke"))
+# print("Changed Letters :",change_letters("Vorgärtnerlücke1"))
 #
 # print("Changed Letters :",change_letters("Längen Möbe"))
 # print("Changed Letters :",change_letters("Läöüß"))
@@ -91,6 +91,7 @@ def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, 
 
 def validate_name(name: str) -> bool:
     """Return True if the name is valid\n Returns False otherwise"""
+    name = change_letters(name)
     if not name:
         return False
     for name in name.split():
@@ -102,6 +103,7 @@ def validate_name(name: str) -> bool:
 
 def validate_address_name(address_name: str) -> bool:
     """Return True if address_name is valid\nReturns False otherwise"""
+    address_name = change_letters(address_name)
     if not address_name:
         return False
     if len(address_name) > 1:
@@ -153,6 +155,7 @@ def validate_postcode(postcode: str) -> bool:
 
 def validate_city(city: str) -> bool:
     """Return True if it is a valid city\n Returns False otherwise"""
+    city = change_letters(city)
     if not city:
         return False
     new_city = city.split()
