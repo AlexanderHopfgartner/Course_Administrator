@@ -42,6 +42,9 @@ class Member(Address, object):
     def display_address(self):
         return f"{self.address_name:<18} {self.street_number:<6}| {self.postcode:<4} {self.city}"
 
+    def display_plain_address(self):
+        return [f"{self.address_name} {self.street_number}",str(self.postcode), self.city]
+
     def member_form(self):
         return MemberForm(
             telnum=self.telnum,

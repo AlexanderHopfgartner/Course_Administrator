@@ -93,7 +93,7 @@ def validate_name(name: str) -> bool:
     """Return True if the name is valid\n Returns False otherwise"""
     if not name:
         return False
-    name = change_letters(name)
+    # name = change_letters(name)
     for name in name.split():
         if name.isalpha():
             return True
@@ -105,7 +105,7 @@ def validate_address_name(address_name: str) -> bool:
     """Return True if address_name is valid\nReturns False otherwise"""
     if not address_name:
         return False
-    address_name = change_letters(address_name)
+    # address_name = change_letters(address_name)
     if len(address_name) > 1:
         new_address = address_name
         address = new_address.split(' ')
@@ -157,7 +157,7 @@ def validate_city(city: str) -> bool:
     """Return True if it is a valid city\n Returns False otherwise"""
     if not city:
         return False
-    city = change_letters(city)
+    # city = change_letters(city)
     new_city = city.split()
     if len(new_city) > 1:
         if city[0].isalpha() and city[-1].isalpha():
