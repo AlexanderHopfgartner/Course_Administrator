@@ -1,5 +1,6 @@
 from logic.validator import *
-from consts import INPUT_END, clear, Form, AddressForm
+from consts import INPUT_END, yon, clear, Form, AddressForm
+
 
 
 def fill_member_form() -> Form:
@@ -93,17 +94,15 @@ def get_role():
         role = input(f"Please Enter Role.\n"
                      f"{[role for role in roles]}{INPUT_END}")
         short_role = role[0:4]
-        for index in range(len(role)):
-            if short_role == "Tei" or short_role == "tei":
-                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+        match short_role:
+            case "Tei" | "tei":
+                if input(f"Is {roles[0]} right? {yon}").lower()[0] == "y":
                     return roles[0]
-
-            if short_role == "Lek" or short_role == "lek":
-                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+            case "Lek" | "lek":
+                if input(f"Is {roles[1]} right? {yon}").lower()[0] == "y":
                     return roles[1]
-
-            if short_role == "Tut" or short_role == "tut":
-                if input(f"Is {roles[index]} right? [yes/no]{INPUT_END}").lower()[0] == "y":
+            case "Tut" | "tut":
+                if input(f"Is {roles[2]} right? {yon}").lower()[0] == "y":
                     return roles[2]
 
         print("Sorry not a role in the list.")
