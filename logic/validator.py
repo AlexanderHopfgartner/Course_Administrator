@@ -110,8 +110,8 @@ def validate_address_name(address_name: str) -> bool:
         new_address = address_name
         address = new_address.split(' ')
         if address[0].isalpha() and address[-1].isalpha() and len(address) > 1:
-            print("Im IF IF IF IF IF")
-            print(address[0], address[-1])
+            # print("Im IF IF IF IF IF")
+            # print(address[0], address[-1])
             if input(f"Is this address name: '{address_name}' {yon}{INPUT_END}").lower()[0] == "y":
                 return True
     if len(address_name) > 1:
@@ -175,27 +175,71 @@ def validate_telnum(telnum: str) -> bool | str:
     telnum2 = telnum.split(' ')
     try:
         if len(telnum2) > 1:
-            print("telnum gets splited:", telnum, telnum2)
+            # print("telnum gets splited:", telnum, telnum2)
             telnum = ""
             for tel in telnum2:
                 telnum += tel
-            print("new telnum:", telnum)
-        if type(int(telnum[1:len(telnum)])) == int:
+        print("telnum:", telnum)
+        # type(int(telnum[1:len(telnum)])) == int
+        if int(telnum[1:]):
             if telnum[0] == "+":
                 new_tel = telnum[0:3] + " " + telnum[3:6] + " " + telnum[6:9] + " " + telnum[9:11] + " " + \
                           telnum[11:13] + " " + telnum[13:15]
+                if len(telnum) > 18:
+                    diff = len(telnum) - 15
+                    begin = 15
+                    diff_by_three = diff // 3
+                    diff_remainder = diff % 3
+                    for i in range(diff_by_three):
+                        if i == diff_by_three:
+                            new_tel += " " + telnum[begin:begin + diff_remainder]
+                            break
+                        new_tel += " " + telnum[begin:begin + 3]
+                        begin += 3
+
+                else:
+                    new_tel += " " + telnum[15:len(telnum)]
+                print("new telnum:", new_tel)
                 return new_tel
             elif telnum[0] == "0":
                 if telnum[0:2] == "01":
-                    print(len(telnum))
-                    print(telnum[0:2])
-                    new_tel = telnum[0:2] + " " + telnum[2:5] + " " + telnum[5:7] + " " + telnum[7:9] + " " + telnum[
-                                                                                                              9:12]
-                    print("not finsihed", new_tel)
+                    # print(len(telnum))
+                    # print(telnum[0:2])
+                    new_tel = telnum[0:2] + " " + telnum[2:5] + " " + telnum[5:7] + " " + telnum[7:9] + " " + telnum[9:12]
+                    if len(telnum) > 15:
+                        diff = len(telnum) - 12
+                        begin = 12
+                        diff_by_three = diff // 3
+                        diff_remainder = diff % 3
+                        for i in  range(diff_by_three):
+                            if i == diff_by_three:
+                                new_tel += " " + telnum[begin:begin+diff_remainder]
+                                break
+                            new_tel += " " + telnum[begin:begin+3]
+                            begin += 3
+
+                    else:
+                        new_tel += " " + telnum[12:len(telnum)]
+                    print("new telnum:", new_tel)
                     return new_tel
 
                 else:
                     new_tel = telnum[0:4] + " " + telnum[4:7] + " " + telnum[7:9] + " " + telnum[9:11]
+                    if len(telnum) > 14:
+                        diff = len(telnum) - 11
+                        begin = 11
+                        diff_by_three = diff // 3
+                        diff_remainder = diff % 3
+                        for i in range(diff_by_three):
+                            if i == diff_by_three:
+                                new_tel += " " + telnum[begin:begin + diff_remainder]
+                                break
+                            new_tel += " " + telnum[begin:begin + 3]
+                            begin += 3
+
+                    else:
+                        new_tel += " " + telnum[11:len(telnum)]
+                    print("new telnum:", new_tel)
                     return new_tel
     except ValueError:
         print(
@@ -204,12 +248,11 @@ def validate_telnum(telnum: str) -> bool | str:
         return False
     return False
 
-
 def validate_email(email: str) -> bool | str:
     """Return True if email is valid\n Returns False otherwise"""
-    while not email or email:
+    if not email:
         return False
-    tld_bool, domain_bool = False, False
+    tld_bool, domain_bool, name_bool = False, False, False
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ru", "ua", "au", "in", "ir", "net"]
     domain_check = ["hotmail", "gmail", "gmx", "sms", "yahoo", "fh-campuswien", "live", "outlook", "AOL", "Zoho",
                     "mail", "ProtonMail", "CounterMail", "Hushmail", "Tutanota"]
@@ -222,17 +265,20 @@ def validate_email(email: str) -> bool | str:
         mail = email.split("@")
         tld = mail[-1].split(".")
         if tld[-1] in tld_check:
-            print("tld_check", tld[-1] in tld_check)
+            # print("tld_check", tld[-1] in tld_check)
             tld_bool = True
-        if tld[0] in domain_check:
-            print("domain check:", tld[0] in domain_check)
+        if len(tld[0]) > 1:
+            # print(tld[0], len(tld[0]))
+            # print("domain check:", len(tld[0]) > 1)
             domain_bool = True
-        print("Bools:", tld_bool, domain_bool)
-        if domain_bool and tld_bool:
-            print("Email variable:", email)
+        if len(mail[0]) > 1:
+            name_bool = True
+        # print("Bools:", tld_bool, domain_bool)
+        if domain_bool and tld_bool and name_bool:
+            # print("Email variable:", email)
             return email
-    print(f"The entered Email: {email} is not valid. \nPlease enter the correct domain(example:'gmail') and "
-          f"Top-Level-Domain (example:'.at')!!\n")
+    print(f"The entered Email: {email} is not valid. \nPlease enter at least 2 characters for the domain-name, the "
+          f"email-name and a correct Top-Level-Domain (example:'.at')!!\n")
     return False
 
 
@@ -269,3 +315,5 @@ def validate_url(url: str) -> bool | str:
     if not tld_bool:
         print(f"Your Top-Level-Domain ('{list_url[-1]}') seems to be wrong!\n")
     return False
+
+
