@@ -205,17 +205,18 @@ def validate_telnum(telnum: str) -> bool | str:
                 if telnum[0:2] == "01":
                     # print(len(telnum))
                     # print(telnum[0:2])
-                    new_tel = telnum[0:2] + " " + telnum[2:5] + " " + telnum[5:7] + " " + telnum[7:9] + " " + telnum[9:12]
+                    new_tel = telnum[0:2] + " " + telnum[2:5] + " " + telnum[5:7] + " " + telnum[7:9] + " " + telnum[
+                                                                                                              9:12]
                     if len(telnum) > 15:
                         diff = len(telnum) - 12
                         begin = 12
                         diff_by_three = diff // 3
                         diff_remainder = diff % 3
-                        for i in  range(diff_by_three):
+                        for i in range(diff_by_three):
                             if i == diff_by_three:
-                                new_tel += " " + telnum[begin:begin+diff_remainder]
+                                new_tel += " " + telnum[begin:begin + diff_remainder]
                                 break
-                            new_tel += " " + telnum[begin:begin+3]
+                            new_tel += " " + telnum[begin:begin + 3]
                             begin += 3
 
                     else:
@@ -248,14 +249,13 @@ def validate_telnum(telnum: str) -> bool | str:
         return False
     return False
 
+
 def validate_email(email: str) -> bool | str:
     """Return True if email is valid\n Returns False otherwise"""
     if not email:
         return False
     tld_bool, domain_bool, name_bool = False, False, False
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ru", "ua", "au", "in", "ir", "net"]
-    domain_check = ["hotmail", "gmail", "gmx", "sms", "yahoo", "fh-campuswien", "live", "outlook", "AOL", "Zoho",
-                    "mail", "ProtonMail", "CounterMail", "Hushmail", "Tutanota"]
     new_mail = email.split(' ')
     if len(new_mail) > 1:
         email = ""
@@ -290,7 +290,6 @@ def validate_url(url: str) -> bool | str:
     tld_check = ["at", "ac.at", "de", "com", "org", "us", "uk", "ua", "ru", "au", "in", "ir", "net"]
     world_wide_web = "www"
     wo_wi_we_bool = False
-    http = "http://"
     list_url = url.split('.')
     if len(url) > 1:
         if len(list_url) > 1:
