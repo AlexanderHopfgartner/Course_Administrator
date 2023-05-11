@@ -46,22 +46,25 @@ def fill_member_form() -> Form:
     clear()
 
     telnum = input(f"Please Enter your Phonenumber (OPTIONAL) ['number'/'no']{INPUT_END}")
-    if telnum[0].lower() == "n":
-        telnum = False
-    else:
-        telnum = validate_telnum(telnum)
+    if telnum:
+        if telnum[0].lower() == "n":
+            telnum = False
+        else:
+            telnum = validate_telnum(telnum)
 
     email = input(f"Please Enter your email (OPTIONAL) ['email'/'no']{INPUT_END}")
-    if email[0].lower() == "n":
-        email = False
-    else:
-        email = validate_email(email)
+    if email:
+        if email[0].lower() == "n":
+            email = False
+        else:
+            email = validate_email(email)
 
     url = input(f"Please Enter your URL (OPTIONAL) ['URL'/'no']{INPUT_END}")
-    if url[0].lower() == "n":
-        url = False
-    else:
-        url = validate_url(url)
+    if url:
+        if url[0].lower() == "n":
+            url = False
+        else:
+            url = validate_url(url)
 
     address, form = dict(), dict()
     for key in dir():
@@ -74,16 +77,14 @@ def fill_member_form() -> Form:
     address, form = dict(), dict()
 
     for key in dir():
-        if key == "form" or key == address:
+        if key == "form" or key == address or key == "key" or key == "value":
             continue
         value = eval(key)
         if key == "address_name" or key == "number" or key == "postcode" or key == "city":
             address[key] = value
         else:
             form[key] = value
-    formiii = Form(**form)
-    print(formiii)
-    return formiii
+    return Form(**form)
 
 
 roles = ["Teilnehmer:in", "Lektor:in", "Tutor:in"]
@@ -93,7 +94,7 @@ def get_role():
     while True:
         role = input(f"Please Enter Role.\n"
                      f"{[role for role in roles]}{INPUT_END}")
-        short_role = role[0:4]
+        short_role = role[0:3]
         match short_role:
             case "Tei" | "tei":
                 if input(f"Is {roles[0]} right? {yon}").lower()[0] == "y":
