@@ -163,7 +163,7 @@ def course_administration(db, user) -> str | None:
         if key == "q!":
             clear()
             save_massage = "Did you save, last change!" if user.id == 0 else ""
-            if input(f"{save_massage}\n\n\nDo you want do leave [yes?]{INPUT_END}").lower()[0] == "y":
+            if itis(f"{save_massage}\n\n\nDo you want do leave [yes?]{INPUT_END}"):
                 return key
             clear()
         key = ""
@@ -171,7 +171,7 @@ def course_administration(db, user) -> str | None:
 
 def add_member():
     from course_administrator.member_form import fill_member_form
-    if input(f"Do you want to add a member? {yon}:\n{INPUT_END}", ).lower()[0] == "y":
+    if itis(f"Do you want to add a member? {yon}:\n{INPUT_END}", ):
         return fill_member_form()
     else:
         return

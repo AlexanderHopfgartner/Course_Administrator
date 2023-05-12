@@ -317,7 +317,7 @@ def validate_url(url: str) -> bool | str:
     return False
 
 
-def itis(text):
+def itis(text: str) -> bool:
     answer = input(text)
     if answer:
         return answer.lower()[0] == "y"

@@ -9,8 +9,8 @@ from logic.validator import *
 def find_user(db, keyword) -> Member | None:
     edit = str
     while not edit == "n":
-        edit = input(f"Do you want to {keyword} a user? {yon}{INPUT_END}").lower()[0]
-        while edit == "y":
+        edit = itis(f"Do you want to {keyword} a user? {yon}{INPUT_END}")
+        while edit:
             edit_user = []
             [print(member.id, ":\t", member) for member in db.members]
             edit_key = input(f"Please enter the \"ID\".{INPUT_END}")
@@ -23,7 +23,7 @@ def find_user(db, keyword) -> Member | None:
             if not edit_user:
                 print("Sorry no user with this \"ID\".")
             elif len(edit_user) == 1:
-                if input(f"Do you want to {keyword} the user: {edit_user}.\n{yon}{INPUT_END}").lower()[0] == "y":
+                if itis(f"Do you want to {keyword} the user: {edit_user}.\n{yon}{INPUT_END}"):
                     edit = edit_user[0]
             else:
                 [print(f"{edit_user.index(user)}: {user}") for user in edit_user]

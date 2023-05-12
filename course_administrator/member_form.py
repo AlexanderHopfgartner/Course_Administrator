@@ -29,7 +29,7 @@ def fill_member_form() -> Form:
     while not validate_name(f_name):
         f_name = input(f"Please Enter first name.{INPUT_END}")
     while not validate_name(name):
-        name = input(f"Please Enter sirname.{INPUT_END}")
+        name = input(f"Please Enter surname.{INPUT_END}")
     clear()
 
     role = get_role()
@@ -97,13 +97,13 @@ def get_role():
         short_role = role[0:3]
         match short_role:
             case "Tei" | "tei":
-                if input(f"Is {roles[0]} right? {yon}").lower()[0] == "y":
+                if itis(f"Is {roles[0]} right? {yon}"):
                     return roles[0]
             case "Lek" | "lek":
-                if input(f"Is {roles[1]} right? {yon}").lower()[0] == "y":
+                if itis(f"Is {roles[1]} right? {yon}"):
                     return roles[1]
             case "Tut" | "tut":
-                if input(f"Is {roles[2]} right? {yon}").lower()[0] == "y":
+                if itis(f"Is {roles[2]} right? {yon}"):
                     return roles[2]
 
         print("Sorry not a role in the list.")
