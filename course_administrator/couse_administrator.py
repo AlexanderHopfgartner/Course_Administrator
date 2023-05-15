@@ -1,4 +1,4 @@
-from consts import INPUT_END, yon, clear, Form, AddressForm, MemberForm
+from consts import INPUT_END, YON, clear, Form, AddressForm, MemberForm
 from logic.validator import *
 
 
@@ -171,7 +171,7 @@ def course_administration(db, user) -> str | None:
 
 def add_member():
     from course_administrator.member_form import fill_member_form
-    if itis(f"Do you want to add a member? {yon}:\n{INPUT_END}", ):
+    if itis(f"Do you want to add a member? {YON}:\n{INPUT_END}", ):
         return fill_member_form()
     else:
         return

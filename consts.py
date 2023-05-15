@@ -1,31 +1,18 @@
 import os
-from typing import TypedDict
+from typing import TypedDict, Optional
 
 
 INPUT_END = "\n>>>"
-yon = "[yes/no]"
+YON = "[yes/no]"
 
 
 def clear():
+    """Clears the Console"""
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
-class AddressForm(TypedDict):
-    address_name: str
-    number: str
-    postcode: int
-    city: str
-
-
-class Form(TypedDict):
-    telnum: str
-    email: str
-    url: str
-    f_name: str
-    name: str
-    role: str
-    address: AddressForm
-
-
-class MemberForm(TypedDict, Form):
-    id: int
+def itis(text: str) -> bool:
+    answer = input(text)
+    if answer:
+        return answer.lower()[0] == "y"
+    return False

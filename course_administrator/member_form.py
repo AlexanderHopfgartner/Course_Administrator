@@ -1,5 +1,5 @@
 from logic.validator import *
-from consts import INPUT_END, yon, clear, Form, AddressForm
+from consts import INPUT_END, YON, clear, Form, AddressForm
 
 
 
@@ -97,13 +97,13 @@ def get_role():
         short_role = role[0:3]
         match short_role:
             case "Tei" | "tei":
-                if itis(f"Is {roles[0]} right? {yon}"):
+                if itis(f"Is {roles[0]} right? {YON}"):
                     return roles[0]
             case "Lek" | "lek":
-                if itis(f"Is {roles[1]} right? {yon}"):
+                if itis(f"Is {roles[1]} right? {YON}"):
                     return roles[1]
             case "Tut" | "tut":
-                if itis(f"Is {roles[2]} right? {yon}"):
+                if itis(f"Is {roles[2]} right? {YON}"):
                     return roles[2]
 
         print("Sorry not a role in the list.")

@@ -1,4 +1,4 @@
-from consts import INPUT_END, yon
+from consts import INPUT_END, YON
 
 
 def change_letters(text: str) -> str:  # Function for replacing ß->ss, ä->ae, ü->ue and ö->oe
@@ -112,11 +112,11 @@ def validate_address_name(address_name: str) -> bool:
         if address[0].isalpha() and address[-1].isalpha() and len(address) > 1:
             # print("Im IF IF IF IF IF")
             # print(address[0], address[-1])
-            if input(f"Is this address name: '{address_name}' {yon}{INPUT_END}").lower()[0] == "y":
+            if input(f"Is this address name: '{address_name}' {YON}{INPUT_END}").lower()[0] == "y":
                 return True
     if len(address_name) > 1:
         if address_name.isalpha():
-            if input(f"Is this address name: '{address_name}' {yon}{INPUT_END}").lower()[0] == "y":
+            if input(f"Is this address name: '{address_name}' {YON}{INPUT_END}").lower()[0] == "y":
                 return True
     print(f"The address name: {address_name} is not valid\nOnly letters and spaces are allowed\n")
     return False
@@ -300,7 +300,7 @@ def validate_url(url: str) -> bool | str:
             if list_url[0] == "ww":
                 list_url[0] = ""
             if not wo_wi_we_bool and tld_bool:
-                if input(f"Do you want to add 'www.' to your URL('{url}')? {yon}{INPUT_END}").lower()[0] == "y":
+                if input(f"Do you want to add 'www.' to your URL('{url}')? {YON}{INPUT_END}").lower()[0] == "y":
                     url = ""
                     if not list_url[0] == "www.":
                         url = world_wide_web + "."
@@ -313,11 +313,4 @@ def validate_url(url: str) -> bool | str:
     print(f"Your URL ({url}) is invalid, please enter a valid URL")
     if not tld_bool:
         print(f"Your Top-Level-Domain ('{list_url[-1]}') seems to be wrong!\n")
-    return False
-
-
-def itis(text: str) -> bool:
-    answer = input(text)
-    if answer:
-        return answer.lower()[0] == "y"
     return False
